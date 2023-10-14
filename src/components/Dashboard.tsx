@@ -1,7 +1,14 @@
 "use client";
 import { trpc } from "@/app/_trpc/client";
 import UploadButton from "./UploadButton";
-import { Ghost, Loader2, MessagesSquare, Plus, Trash } from "lucide-react";
+import {
+  Ghost,
+  Loader2,
+  MessageSquare,
+  MessagesSquare,
+  Plus,
+  Trash,
+} from "lucide-react";
 import Skeleton from "react-loading-skeleton";
 import Link from "next/link";
 import { format } from "date-fns";
@@ -67,23 +74,25 @@ const Dashboard = () => {
                     <Plus className="h-4 w-4" />
                     {format(new Date(file.createdAt), "MMM yyyy")}
                   </div>
+
+                  <div className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4" />
+                    mocked
+                  </div>
+
+                  <Button
+                    onClick={() => deleteFile({ id: file.id, name: file.name })}
+                    size="sm"
+                    className="w-full"
+                    variant="destructive"
+                  >
+                    {currentlyDeletingFile === file.id ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <Trash className="h-4 w-4" />
+                    )}
+                  </Button>
                 </div>
-                <div>
-                  <MessagesSquare className="h-4 w-4" />
-                  mocked
-                </div>
-                <Button
-                  onClick={() => deleteFile({ id: file.id, name: file.name })}
-                  size={"sm"}
-                  className="w-full"
-                  variant={"destructive"}
-                >
-                  {currentlyDeletingFile !== file.id ? (
-                    <Trash className="h-4 w-4" />
-                  ) : (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  )}
-                </Button>
               </li>
             ))}
         </ul>
