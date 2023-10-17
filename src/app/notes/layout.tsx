@@ -1,6 +1,7 @@
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Inter } from "next/font/google";
+import { ModalProvider } from "@/components/providers/ModalProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 export default function NotesLayout({
@@ -19,6 +20,7 @@ export default function NotesLayout({
           storageKey="estatezap-theme"
         >
           <Toaster position="bottom-center" />
+          <ModalProvider />
           {children}
         </ThemeProvider>
       </body>

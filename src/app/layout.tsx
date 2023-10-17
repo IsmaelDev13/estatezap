@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import "react-loading-skeleton/dist/skeleton.css";
 import "simplebar-react/dist/simplebar.min.css";
 import { ConvexClientProvider } from "@/components/providers/ConvexProvider";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,16 +24,18 @@ export default function RootLayout({
     <html lang="en" className="light">
       <Providers>
         <ConvexClientProvider>
-          <body
-            className={cn(
-              "min-h-screen font-sans antialiased grainy",
-              inter.className
-            )}
-          >
-            <Toaster />
-            <Navbar />
-            {children}
-          </body>
+          <EdgeStoreProvider>
+            <body
+              className={cn(
+                "min-h-screen font-sans antialiased grainy",
+                inter.className
+              )}
+            >
+              <Toaster />
+              <Navbar />
+              {children}
+            </body>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
       </Providers>
     </html>
