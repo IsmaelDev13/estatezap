@@ -21,7 +21,6 @@ const Cover = ({ preview, url }: CoverImageProps) => {
   const coverImage = useCoverImage();
   const params = useParams();
   const { edgestore } = useEdgeStore();
-
   const removeCoverImage = useMutation(api.documents.removeCoverImage);
 
   const onRemove = async () => {

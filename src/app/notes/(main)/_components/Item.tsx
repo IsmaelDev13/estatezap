@@ -63,7 +63,7 @@ export const Item = ({
   const onArchive = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.stopPropagation();
     if (!id) return;
-    const promise = archive({ id });
+    const promise = archive({ id }).then(() => router.push("/notes/documents"));
     toast.promise(promise, {
       loading: "Moving to trash...",
       success: "Note moved to trash!",
