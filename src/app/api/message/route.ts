@@ -2,10 +2,11 @@ import { db } from "@/db";
 import { openai } from "@/lib/openai";
 import { getPineconeClient } from "@/lib/pinecone";
 import { SendMessageValidator } from "@/lib/validators/SendMessageValidator";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { OpenAIEmbeddings } from "langchain/embeddings/openai";
 import { PineconeStore } from "langchain/vectorstores/pinecone";
 import { NextRequest } from "next/server";
+import { currentUser } from "@clerk/nextjs";
 
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
@@ -13,13 +14,13 @@ export const POST = async (req: NextRequest) => {
   //endpoint for asking a question to a pdf file
 
   const body = await req.json();
+  const user = await currentUser();
+  // const { getUser } = getKindeServerSession();
+  // const user = getUser();
 
-  const { getUser } = getKindeServerSession();
-  const user = getUser();
+  if (!user) return new Response("Unauthorized", { status: 401 });
 
   const { id: userId } = user;
-
-  if (!userId) return new Response("Unauthorized", { status: 401 });
 
   const { fileId, message } = SendMessageValidator.parse(body);
 

@@ -1,18 +1,18 @@
 import Link from "next/link";
 import MaxWidthWrapper from "./MaxWidthWrapper";
 import { buttonVariants } from "./ui/button";
-import {
-  LoginLink,
-  RegisterLink,
-  getKindeServerSession,
-} from "@kinde-oss/kinde-auth-nextjs/server";
+// import {
+//   LoginLink,
+//   RegisterLink,
+//   getKindeServerSession,
+// } from "@kinde-oss/kinde-auth-nextjs/server";
 import { ArrowRight } from "lucide-react";
 import UserAccountNav from "./UserAccountNav";
 import MobileNavbar from "./MobileNavbar";
+import { SignInButton, currentUser } from "@clerk/nextjs";
 
-const Navbar = () => {
-  const { getUser } = getKindeServerSession();
-  const user = getUser();
+const Navbar = async () => {
+  const user = await currentUser();
 
   return (
     <nav className="sticky h-14 inset-x-0 top-0 z-30 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
@@ -35,21 +35,7 @@ const Navbar = () => {
                 >
                   Pricing
                 </Link>
-                <LoginLink
-                  className={buttonVariants({
-                    variant: "ghost",
-                    size: "sm",
-                  })}
-                >
-                  Sign in
-                </LoginLink>
-                <RegisterLink
-                  className={buttonVariants({
-                    size: "sm",
-                  })}
-                >
-                  Get started <ArrowRight className="ml-1.5 h-5 w-5" />
-                </RegisterLink>
+                <SignInButton />
               </>
             ) : (
               <>
@@ -64,12 +50,12 @@ const Navbar = () => {
                 </Link>
                 <UserAccountNav
                   name={
-                    !user.given_name || !user.family_name
+                    `${!user.firstName}  ${!user.lastName}`
                       ? "Your Account"
-                      : `${user.given_name} ${user.family_name}`
+                      : `${user.firstName} ${user.lastName}`
                   }
-                  email={user.email ?? ""}
-                  imageUrl={user.picture ?? ""}
+                  email={user.emailAddresses[0].emailAddress ?? ""}
+                  imageUrl={user.imageUrl ?? ""}
                 />
               </>
             )}

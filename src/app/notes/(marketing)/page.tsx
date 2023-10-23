@@ -1,4 +1,4 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import Footer from "./_components/Footer";
 import Heading from "./_components/Heading";
 import Heroes from "./_components/Heroes";

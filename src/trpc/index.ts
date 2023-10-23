@@ -7,13 +7,17 @@ import { INFINITE_QUERY_LIMIT } from "@/config/infinite-query";
 import { absoluteUrl } from "@/lib/utils";
 import { getUserSubscriptionPlan, stripe } from "@/lib/stripe";
 import { PLANS } from "@/config/stripe";
+import { currentUser } from "@clerk/nextjs";
 
 export const appRouter = router({
   authCallback: publicProcedure.query(async () => {
-    const { getUser } = getKindeServerSession();
-    const user = getUser();
+    const user = await currentUser();
+    // const { getUser } = getKindeServerSession();
+    // const user = getUser();
+    if (!user) throw new Error("Unauthorized");
 
-    if (!user.id || !user.email) throw new TRPCError({ code: "UNAUTHORIZED" });
+    if (!user.id || !user.emailAddresses[0].emailAddress)
+      throw new TRPCError({ code: "UNAUTHORIZED" });
 
     //check if the user is in the database
 
@@ -28,7 +32,7 @@ export const appRouter = router({
       await db.user.create({
         data: {
           id: user.id,
-          email: user.email,
+          email: user.emailAddresses[0].emailAddress,
         },
       });
     }

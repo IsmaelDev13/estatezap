@@ -119,7 +119,7 @@ const Navigation = () => {
 
   const handleCreate = () => {
     const promise = create({ title: "Untitled" }).then((documentId) =>
-      router.push(`/documents/${documentId}`)
+      router.push(`/notes/documents/${documentId}`)
     );
 
     toast.promise(promise, {

@@ -1,11 +1,13 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+// import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { currentUser } from "@clerk/nextjs";
 import Navbar from "./_components/Navbar";
-import { getUserSubscriptionPlan } from "@/lib/stripe";
+// import { getUserSubscriptionPlan } from "@/lib/stripe";
 import { redirect } from "next/navigation";
 
-const MarketingLayout = ({ children }: { children: React.ReactNode }) => {
-  const { getUser } = getKindeServerSession();
-  const user = getUser();
+const MarketingLayout = async ({ children }: { children: React.ReactNode }) => {
+  const user = await currentUser();
+  // const { getUser } = getKindeServerSession();
+  // const user = getUser();
 
   if (!user || !user.id) redirect("/auth-callback?origin=dashboard");
   return (

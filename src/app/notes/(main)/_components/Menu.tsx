@@ -37,7 +37,7 @@ export const Menu = ({ documentId }: MenuProps) => {
       error: "Failed to archive note.",
     });
 
-    router.push("/documents");
+    router.push("/notes/documents");
   };
   return (
     <DropdownMenu>

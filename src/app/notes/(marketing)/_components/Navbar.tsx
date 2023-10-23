@@ -5,7 +5,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { useScrollTop } from "@/hooks/use-scroll-top";
 import { getUserSubscriptionPlan } from "@/lib/stripe";
 import { cn } from "@/lib/utils";
-import { KindeUser, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server";
+// import { KindeUser, LoginLink } from "@kinde-oss/kinde-auth-nextjs/server";
 import Link from "next/link";
 import { useConvexAuth } from "convex/react";
 import { SignInButton, UserButton } from "@clerk/clerk-react";

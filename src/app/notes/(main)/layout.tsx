@@ -4,6 +4,7 @@ import Navigation from "./_components/Navigation";
 import { useConvexAuth } from "convex/react";
 import { Loader2 } from "lucide-react";
 import { SearchCommand } from "./_components/SearchCommand";
+import Navbar from "@/components/Navbar";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, isLoading } = useConvexAuth();
@@ -20,7 +21,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
     return redirect("/");
   }
   return (
-    <div className="h-[calc(100vh-3.5rem-7rem)] flex dark:bg-[#1f1f1f]">
+    <div className="h-full  flex dark:bg-[#1f1f1f]">
       <Navigation />
       <main className="flex-1 h-full overflow-y-auto">
         <SearchCommand />

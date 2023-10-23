@@ -16,15 +16,14 @@ const Page = () => {
 
   const onCreate = () => {
     const promise = create({ title: "Untitled" }).then((documentId) =>
-      router.push(`/documents/${documentId}`)
+      router.push(`/notes/documents/${documentId}`)
     );
 
-    toast.promise,
-      {
-        loading: "Creating a new note...",
-        success: "New note created",
-        error: "Failed to create a new note.",
-      };
+    toast.promise(promise, {
+      loading: "Creating a new note...",
+      success: "New note created",
+      error: "Failed to create a new note.",
+    });
   };
 
   return (

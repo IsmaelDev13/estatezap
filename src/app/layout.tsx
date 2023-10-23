@@ -10,6 +10,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import "simplebar-react/dist/simplebar.min.css";
 import { ConvexClientProvider } from "@/components/providers/ConvexProvider";
 import { EdgeStoreProvider } from "@/lib/edgestore";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
