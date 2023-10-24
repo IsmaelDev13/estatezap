@@ -17,6 +17,7 @@ model User {
 
   File    File[]
   Message Message[]
+  Form    Form[]
 
   stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
   stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
@@ -57,4 +58,30 @@ model Message {
   userId        String?
   File          File?    @relation(fields: [fileId], references: [id])
   fileId        String?
+}
+
+model Form {
+  id          Int      @id @default(autoincrement())
+  userId      String
+  createdAt   DateTime @default(now())
+  published   Boolean  @default(false)
+  name        String
+  description String   @default("")
+  content     String   @default("[]")
+
+  visits          Int               @default(0)
+  submissions     Int               @default(0)
+  shareUrl        String            @unique @default(uuid())
+  FormSubmissions FormSubmissions[]
+  User            User              @relation(fields: [userId], references: [id])
+
+  @@unique([name, userId])
+}
+
+model FormSubmissions {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  formId    Int
+  form      Form     @relation(fields: [formId], references: [id])
+  content   String
 }

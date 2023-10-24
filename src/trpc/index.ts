@@ -39,6 +39,92 @@ export const appRouter = router({
 
     return { success: true };
   }),
+
+  createForm: privateProcedure
+    .input(
+      z.object({ name: z.string().min(4), description: z.string().optional() })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const { userId } = ctx;
+
+      const form = await db.form.create({
+        data: {
+          userId,
+          name: input.name,
+          description: input.description,
+        },
+      });
+      if (!form) {
+        throw new Error("Something went wrong");
+      }
+
+      return form.id;
+    }),
+
+  //FORMS
+  getFormStats: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx;
+    if (!userId) throw new TRPCError({ code: "UNAUTHORIZED" });
+
+    const stats = await db.form.aggregate({
+      where: {
+        userId,
+      },
+      _sum: {
+        visits: true,
+        submissions: true,
+      },
+    });
+    const visits = stats._sum.visits || 0;
+    const submissions = stats._sum.submissions || 0;
+    let submissionsRate = 0;
+
+    if (visits > 0) {
+      submissionsRate = (submissions / visits) * 100;
+    }
+
+    const bounceRate = 100 - submissionsRate;
+
+    return {
+      visits,
+      submissions,
+      submissionsRate,
+      bounceRate,
+    };
+  }),
+
+  getForms: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx;
+
+    return await db.form.findMany({
+      where: {
+        userId,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }),
+
+  getFormsById: privateProcedure
+    .input(
+      z.object({
+        id: z.any(),
+      })
+    )
+    .query(async ({ input, ctx }) => {
+      const { userId } = ctx;
+      const form = await db.form.findFirst({
+        where: {
+          userId,
+          id: input.id,
+        },
+      });
+
+      if (!form) throw new TRPCError({ code: "NOT_FOUND" });
+      return form;
+    }),
+
   getUserFiles: privateProcedure.query(async ({ ctx }) => {
     const { userId } = ctx;
 
