@@ -1,19 +1,11 @@
 "use client";
 
-import { MdTextFields } from "react-icons/md";
-import {
-  ElementsType,
-  FormElement,
-  FormElementInstance,
-  SubmitFunction,
-} from "../FormElements";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { string, z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import useDesigner from "@/hooks/useDesigner";
 import { IoMdCheckbox } from "react-icons/io";
 
 import {
@@ -25,9 +17,16 @@ import {
   FormMessage,
   FormItem,
 } from "@/components/ui/form";
-import { Switch } from "../ui/switch";
 import { cn } from "@/lib/utils";
-import { Checkbox } from "../ui/checkbox";
+import {
+  ElementsType,
+  FormElement,
+  FormElementInstance,
+  SubmitFunction,
+} from "../builder/FormElements";
+import useDesigner from "@/hooks/use-designer";
+import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export const type: ElementsType = "CheckboxField";
 

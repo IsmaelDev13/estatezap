@@ -1,3 +1,4 @@
+import DesignerContextProvider from "@/components/context/DesignerContext";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import type { Metadata } from "next";
@@ -9,15 +10,12 @@ export default function FormsLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {/* <ThemeProvider
-          attribute="class"
-          defaultTheme="li"
-          enableSystem
-          disableTransitionOnChange
-        > */}
-        {children}
-        <Toaster />
-        {/* </ThemeProvider> */}
+        <DesignerContextProvider>
+          <div className="flex flex-col min-h-screen min-w-full max-h-screen">
+            <main className="flex w-full flex-grow">{children}</main>
+          </div>
+          <Toaster />
+        </DesignerContextProvider>
       </body>
     </html>
   );

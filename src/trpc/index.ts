@@ -109,15 +109,16 @@ export const appRouter = router({
   getFormsById: privateProcedure
     .input(
       z.object({
-        id: z.any(),
+        id: z.number(),
       })
     )
     .query(async ({ input, ctx }) => {
       const { userId } = ctx;
+      const { id } = input;
       const form = await db.form.findFirst({
         where: {
           userId,
-          id: input.id,
+          id: id,
         },
       });
 
@@ -134,6 +135,34 @@ export const appRouter = router({
       },
     });
   }),
+
+  //CONTACTS
+
+  getUserContacts: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx;
+
+    return await db.contact.findMany({
+      where: {
+        userId,
+      },
+    });
+  }),
+
+  getContactById: privateProcedure
+    .input(z.number())
+    .query(async ({ ctx, input }) => {
+      const { userId } = ctx;
+      const id = input;
+
+      console.log(id);
+
+      return await db.contact.findFirst({
+        where: {
+          userId,
+          id: id,
+        },
+      });
+    }),
 
   createStripeSession: privateProcedure.mutation(async ({ ctx }) => {
     const { userId } = ctx;
@@ -285,6 +314,29 @@ export const appRouter = router({
       });
 
       return file;
+    }),
+
+  deleteContact: privateProcedure
+    .input(z.object({ contactIds: z.array(z.number()) }))
+    .mutation(async ({ ctx, input }) => {
+      const { userId } = ctx;
+      for (const contactId of input.contactIds) {
+        const contact = await db.contact.findFirst({
+          where: {
+            id: Number(contactId),
+            userId: userId,
+          },
+        });
+
+        if (!contact) throw new TRPCError({ code: "NOT_FOUND" });
+
+        await db.contact.delete({
+          where: {
+            id: Number(contactId),
+          },
+        });
+        return contact;
+      }
     }),
 });
 

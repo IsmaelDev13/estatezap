@@ -1,19 +1,18 @@
 "use client";
 
-import { MdTextFields } from "react-icons/md";
 import {
   ElementsType,
   FormElement,
   FormElementInstance,
   SubmitFunction,
-} from "../FormElements";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+} from "../builder/FormElements";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import useDesigner from "@/hooks/useDesigner";
+import useDesigner from "@/hooks/use-designer";
 
 import {
   Form,

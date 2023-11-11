@@ -12,6 +12,7 @@ import { Form } from "@prisma/client";
 import { formatDistance } from "date-fns";
 import { ArrowRight, Edit, View } from "lucide-react";
 import Link from "next/link";
+import { FaWpforms } from "react-icons/fa";
 
 const FormCard = ({ form }: { form: Form }) => {
   return (
@@ -31,7 +32,7 @@ const FormCard = ({ form }: { form: Form }) => {
             <span className="flex items-center gap-2">
               <View className="text-muted-foreground" />
               <span>{form.visits.toLocaleString()}</span>
-              <form className="text-muted-foreground" />
+              <FaWpforms className="text-muted-foreground" />
               <span>{form.visits.toLocaleString()}</span>
             </span>
           )}
@@ -43,7 +44,7 @@ const FormCard = ({ form }: { form: Form }) => {
       <CardFooter>
         {form.published && (
           <Button asChild className="w-full mt-2 text-md gap-4">
-            <Link href={`/forms/${form.id}`}>
+            <Link href={`/forms/forms/${form.id}`}>
               View submissions <ArrowRight />
             </Link>
           </Button>
@@ -54,7 +55,7 @@ const FormCard = ({ form }: { form: Form }) => {
             asChild
             className="w-full mt-2 text-md gap-4"
           >
-            <Link href={`/builder/${form.id}`}>
+            <Link href={`/forms/builder/${form.id}`}>
               Edit form <Edit />
             </Link>
           </Button>

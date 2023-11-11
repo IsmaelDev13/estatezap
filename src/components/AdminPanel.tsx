@@ -16,6 +16,11 @@ const navigation = [
     name: "Forms",
     ref: "/forms",
   },
+  {
+    id: 4,
+    name: "Contacts",
+    ref: "/contacts",
+  },
 ];
 
 const AdminPanel = () => {

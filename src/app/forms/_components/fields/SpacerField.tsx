@@ -1,33 +1,27 @@
 "use client";
 
-import { MdTextFields } from "react-icons/md";
 import {
   ElementsType,
   FormElement,
   FormElementInstance,
-  SubmitFunction,
-} from "../FormElements";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+} from "../builder/FormElements";
+import { Label } from "@/components/ui/label";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import useDesigner from "@/hooks/useDesigner";
+import useDesigner from "@/hooks/use-designer";
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormLabel,
   FormMessage,
   FormItem,
 } from "@/components/ui/form";
-import { Switch } from "../ui/switch";
-import { cn } from "@/lib/utils";
 import { LuHeading1, LuSeparatorHorizontal } from "react-icons/lu";
-import { Slider } from "../ui/slider";
+import { Slider } from "@/components/ui/slider";
 
 export const type: ElementsType = "SpacerField";
 
@@ -48,7 +42,7 @@ export const SpacerFieldFormElement: FormElement = {
   }),
   designerBtnElement: {
     icon: LuSeparatorHorizontal,
-    label: "Title Field",
+    label: "Spacer Field",
   },
   designerComponent: DesignerComponent,
   formComponent: FormComponent,

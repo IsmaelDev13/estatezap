@@ -6,14 +6,13 @@ import {
   FormElement,
   FormElementInstance,
   SubmitFunction,
-} from "../FormElements";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
+} from "../builder/FormElements";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useState } from "react";
-import useDesigner from "@/hooks/useDesigner";
 
 import {
   Form,
@@ -24,9 +23,10 @@ import {
   FormMessage,
   FormItem,
 } from "@/components/ui/form";
-import { Switch } from "../ui/switch";
 import { cn } from "@/lib/utils";
 import { Bs123 } from "react-icons/bs";
+import useDesigner from "@/hooks/use-designer";
+import { Switch } from "@/components/ui/switch";
 
 export const type: ElementsType = "NumberField";
 
@@ -90,8 +90,8 @@ function PropertiesComponent({
     defaultValues: {
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
-      required: element.extraAttributes.required,
-      placeHolder: element.extraAttributes.placeHolder,
+      // required: element.extraAttributes.required,
+      // placeHolder: element.extraAttributes.placeHolder,
     },
   });
 
@@ -104,10 +104,10 @@ function PropertiesComponent({
     updateElement(element.id, {
       ...element,
       extraAttributes: {
-        label: label,
-        helperText: helperText,
-        placeHolder: placeHolder,
-        required: required,
+        label,
+        helperText,
+        placeHolder,
+        required,
       },
     });
   }
