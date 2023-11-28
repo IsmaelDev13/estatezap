@@ -21,6 +21,11 @@ const navigation = [
     name: "Contacts",
     ref: "/contacts",
   },
+  {
+    id: 5,
+    name: "Task List",
+    ref: "/task",
+  },
 ];
 
 const AdminPanel = () => {

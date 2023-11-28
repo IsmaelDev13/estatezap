@@ -74,7 +74,7 @@ const Contacts = () => {
             />
           </div>
           <div
-            className="flex items-center gap-2 rounded bg-white h-8 shadow px-2"
+            className="flex items-center gap-2 rounded bg-white h-8 shadow px-2 cursor-pointer"
             onClick={() => router.push(`/contacts/management`)}
           >
             <DollarSign className="h-6 w-6 text-gray-500" />

@@ -4,7 +4,7 @@ import { HiSaveAs } from "react-icons/hi";
 import useDesigner from "@/hooks/use-designer";
 import { toast } from "@/components/ui/use-toast";
 import { FaSpinner } from "react-icons/fa";
-import { UpdateFormContent } from "../../../../../actions/form";
+import { UpdateFormContent } from "../../../../actions/form";
 
 function SaveFormBtn({ id }: { id: number }) {
   const { elements } = useDesigner();

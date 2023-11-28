@@ -25,7 +25,7 @@ import { useToast } from "@/components/ui/use-toast";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ImSpinner2 } from "react-icons/im";
-import { CreateContact } from "../../../../../actions/form";
+import { CreateContact } from "../../../../actions/form";
 import { ContactSchema, ContactSchemaType } from "@/schemas/contact";
 import { trpc } from "@/app/_trpc/client";
 

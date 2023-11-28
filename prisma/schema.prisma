@@ -107,6 +107,91 @@ model Contact {
   contactSource String?
   contactType   ContactType @default(LEAD)
   User          User        @relation(fields: [userId], references: [id])
+  Column        Column?     @relation(fields: [columnId], references: [id])
+  columnId      Int?
 
   @@unique([phoneNumber, userId])
+}
+
+model Column {
+  id           Int         @id @default(autoincrement())
+  userId       String
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  title        String
+  pipelineType ContactType @default(LEAD)
+  contacts     Contact[]
+
+  @@unique([pipelineType])
+}
+
+model Board {
+  id            String @id @default(uuid())
+  orgId         String
+  title         String
+  imageId       String
+  imageThumUrl  String @db.Text
+  imageFullUrl  String @db.Text
+  imageUserName String @db.Text
+  imageLinkHTML String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  lists     List[]
+}
+
+model List {
+  id    String @id @default(uuid())
+  title String
+  order Int
+
+  boardId String
+  board   Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  cards   Card[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([boardId])
+}
+
+model Card {
+  id          String  @id @default(uuid())
+  title       String
+  order       Int
+  description String? @db.Text
+
+  listId String
+  list   List   @relation(fields: [listId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([listId])
+}
+
+enum ACTION {
+  CREATE
+  UPDATE
+  DELETE
+}
+
+enum ENTITY_TYPE {
+  BOARD
+  LIST
+  CARD
+}
+
+model AuditLog {
+  id          String      @id @default(uuid())
+  orgId       String
+  action      ACTION
+  entityId    String
+  entityType  ENTITY_TYPE
+  entityTitle String
+  userId      String
+  userImage   String      @db.Text
+  userName    String      @db.Text
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
 }

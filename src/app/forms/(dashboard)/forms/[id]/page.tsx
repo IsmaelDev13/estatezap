@@ -9,7 +9,7 @@ import { TbArrowBounce } from "react-icons/tb";
 import {
   GetFormById,
   GetFormWithSubmissions,
-} from "../../../../../../actions/form";
+} from "../../../../../actions/form";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import {

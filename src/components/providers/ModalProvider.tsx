@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 import { SettingsModal } from "@/app/notes/(main)/_components/modals/SettingsModal";
 import { CoverImageModal } from "@/app/notes/(main)/_components/modals/CoverImageModal";
+import { CardModal } from "../modals/card-modal";
 
 export const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState(false);

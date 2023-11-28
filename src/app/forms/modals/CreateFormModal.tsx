@@ -32,7 +32,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-import { CreateForm } from "../../../../actions/form";
+import { CreateForm } from "../../../actions/form";
 
 const formSchema = z.object({
   name: z.string().min(4),

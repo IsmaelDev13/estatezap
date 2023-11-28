@@ -1,5 +1,6 @@
 "use server";
 import { db } from "@/db";
+import { ColumnSchema, ColumnSchemaType } from "@/schemas/column";
 import { ContactSchema, ContactSchemaType } from "@/schemas/contact";
 import { formSchema, formSchemaType } from "@/schemas/form";
 import { currentUser } from "@clerk/nextjs";
@@ -213,4 +214,30 @@ export async function GetFormWithSubmissions(id: number) {
       FormSubmissions: true,
     },
   });
+}
+
+export async function CreateColumn(data: ColumnSchemaType) {
+  const validation = ColumnSchema.safeParse(data);
+  if (!validation.success) {
+    throw new Error("form not valid");
+  }
+  const user = await currentUser();
+  if (!user) {
+    throw new UserNotFoundErr();
+  }
+
+  const { title } = data;
+
+  const column = await db.column.create({
+    data: {
+      userId: user.id,
+      title: title,
+    },
+  });
+
+  if (!column) {
+    throw new Error("Something went wrong");
+  }
+
+  return column.id;
 }

@@ -1,6 +1,6 @@
 import FormBuilder from "@/app/forms/_components/builder/FormBuilder";
 import React from "react";
-import { GetFormById } from "../../../../../../actions/form";
+import { GetFormById } from "../../../../../actions/form";
 
 async function BuilderPage({ params }: { params: { id: string } }) {
   const { id } = params;

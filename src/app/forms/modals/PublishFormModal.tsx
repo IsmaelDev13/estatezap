@@ -16,7 +16,7 @@ import { FaIcons, FaSpinner } from "react-icons/fa";
 import { toast } from "@/components/ui/use-toast";
 
 import { useRouter } from "next/navigation";
-import { PublishForm } from "../../../../actions/form";
+import { PublishForm } from "../../../actions/form";
 
 function PublishFormModal({ id }: { id: number }) {
   const [loading, startTransition] = useTransition();

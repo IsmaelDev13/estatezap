@@ -1,6 +1,6 @@
 // "use client";
 import { trpc } from "@/app/_trpc/client";
-import { GetContactById } from "../../../../actions/form";
+import { GetContactById } from "../../../actions/form";
 import SingleContact from "../_components/SingleContact";
 // import { GetContactById } from "../../../../actions/form";
 // import SingleContact from "../_components/SingleContact";

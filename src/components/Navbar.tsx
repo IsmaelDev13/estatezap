@@ -22,7 +22,7 @@ const Navbar = async () => {
             <span>estatezap.</span>
           </Link>
           {/* add mobile navbar */}
-          <MobileNavbar isAuth={!!user} />
+          {/* <MobileNavbar isAuth={!!user} /> */}
           <div className="hidden items-center space-x-4 sm:flex ">
             {!user ? (
               <>

@@ -19,7 +19,7 @@ import { ArrowLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { ImSpinner2 } from "react-icons/im";
-import { UpdateContact } from "../../../../actions/form";
+import { UpdateContact } from "../../../actions/form";
 
 interface SingleContactProps {
   id: string;

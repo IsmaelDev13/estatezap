@@ -148,6 +148,16 @@ export const appRouter = router({
     });
   }),
 
+  getUserColumns: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx;
+
+    return await db.column.findMany({
+      where: {
+        userId: userId,
+      },
+    });
+  }),
+
   getContactById: privateProcedure
     .input(z.number())
     .query(async ({ ctx, input }) => {
